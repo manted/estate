@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Lot</th>
+    <th>Estate</th>
+    <th>Address</th>
+    <th>Office</th>
+    <th>Client Name</th>
+    <th>FIRB</th>
+    <th>Solicitor</th>
+    <th>Builder</th>
+    <th></th>
+  </tr>
+ 
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.status %></td>
+      <td><%= project.lot %></td>
+      <td><%= project.estate %></td>
+      <td><%= project.address %></td>
+      <td><%= project.office %></td>
+      <td><%= project.client_name %></td>
+      <td><%= project.firb %></td>
+      <td><%= project.solicitor %></td>
+      <td><%= project.builder %></td>
+      <td><%= link_to 'Show', project_path(project) %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
