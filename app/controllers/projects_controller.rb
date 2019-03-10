@@ -47,9 +47,6 @@ class ProjectsController < ApplicationController
     search_params.each do |key, val|
       valid_params[key.to_sym] = val if val.present?
     end
-    puts "!!!!!!!!!!!!!!!!!!!"
-    puts valid_params
-    puts "!!!!!!!!!!!!!!!!!!!"
     @projects = Project.where(valid_params)
   end
 
