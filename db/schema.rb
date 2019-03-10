@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190309123023) do
+ActiveRecord::Schema.define(version: 20190310100940) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
     t.string "lot"
@@ -33,10 +36,12 @@ ActiveRecord::Schema.define(version: 20190309123023) do
     t.datetime "final_settlement_date"
     t.string "funds_type"
     t.string "broker"
-    t.integer "project_id"
+    t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "property_type"
     t.index ["project_id"], name: "index_settlements_on_project_id"
   end
 
+  add_foreign_key "settlements", "projects"
 end
