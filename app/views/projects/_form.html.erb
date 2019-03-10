@@ -1,0 +1,60 @@
+<%= form_with(model: @project, local: true) do |form| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@project.errors.count, "error") %> prohibited
+        this project from being saved:
+      </h2>
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :lot %><br>
+    <%= form.text_field :lot %>
+  </p>
+ 
+  <p>
+    <%= form.label :estate %><br>
+    <%= form.text_field :estate %>
+  </p>
+ 
+  <p>
+    <%= form.label :address %><br>
+    <%= form.text_field :address %>
+  </p>
+ 
+  <p>
+    <%= form.label :office %><br>
+    <%= form.text_field :office %>
+  </p>
+
+  <h2>Settlement</h2>
+  <p>
+    <%= form.label :estimated_settlement_date %><br>
+    <%= form.text_field :estimated_settlement_date, :value => @project.date_string(:estimated_settlement_date) %>
+  </p>
+ 
+  <p>
+    <%= form.label :title_registered_date %><br>
+    <%= form.text_field :title_registered_date, :value => @project.date_string(:title_registered_date) %>
+  </p>
+ 
+  <p>
+    <%= form.label :planned_settlement_date %><br>
+    <%= form.text_field :planned_settlement_date, :value => @project.date_string(:planned_settlement_date) %>
+  </p>
+ 
+  <p>
+    <%= form.label :final_settlement_date %><br>
+    <%= form.text_field :final_settlement_date, :value => @project.date_string(:final_settlement_date) %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

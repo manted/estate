@@ -1,0 +1,30 @@
+<%= form_with(model: @project, method: 'get', local: true) do |form| %>
+  <p>
+    <%= form.label :status %><br>
+    <select name="property_status">
+      <option value=""></option>
+      <option value="Prepare Settlement" selected="selected">Prepare Settlement</option>
+      <option value="Title Registered">Title Registered</option>
+      <option value="Settled">Settled</option>
+    </select>
+  </p>
+
+  <p>
+    <%= form.label :lot %><br>
+    <%= form.text_field :lot %>
+  </p>
+ 
+  <p>
+    <%= form.label :estate %><br>
+    <%= form.text_field :estate %>
+  </p>
+ 
+  <p>
+    <%= form.label :office %><br>
+    <%= form.text_field :office %>
+  </p>
+
+  <p>
+    <%= form.submit 'Search' %>
+  </p>
+<% end %>

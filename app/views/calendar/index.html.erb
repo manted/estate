@@ -1,0 +1,103 @@
+<h1>Upcoming Events</h1>
+
+<%= link_to 'Back', projects_path %>
+<%= link_to 'Search', search_path %>
+ 
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Lot</th>
+    <th>Estate</th>
+    <th>Address</th>
+    <th>Office</th>
+    <th>Estimated Settlement Date</th>
+    <th>Planned Settlement Date</th>
+    <th>Final Settlement Date</th>
+    <th></th>
+  </tr>
+ 
+  <h2>Estimated Settlement Dates in 90 days</h2>
+  <% @estimated_projects.each do |project| %>
+    <tr>
+      <td><%= project.status %></td>
+      <td><%= project.lot %></td>
+      <td><%= project.estate %></td>
+      <td><%= project.address %></td>
+      <td><%= project.office %></td>
+      <td><%= project.settlement.date_string(:estimated_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:planned_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:final_settlement_date) %></td>
+      <td><%= link_to 'Show', project_path(project) %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+ 
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Lot</th>
+    <th>Estate</th>
+    <th>Address</th>
+    <th>Office</th>
+    <th>Estimated Settlement Date</th>
+    <th>Planned Settlement Date</th>
+    <th>Final Settlement Date</th>
+    <th></th>
+  </tr>
+ 
+  <h2>Planned Settlement Dates in 30 days</h2>
+  <% @planned_projects.each do |project| %>
+    <tr>
+      <td><%= project.status %></td>
+      <td><%= project.lot %></td>
+      <td><%= project.estate %></td>
+      <td><%= project.address %></td>
+      <td><%= project.office %></td>
+      <td><%= project.settlement.date_string(:estimated_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:planned_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:final_settlement_date) %></td>
+      <td><%= link_to 'Show', project_path(project) %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+ 
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Lot</th>
+    <th>Estate</th>
+    <th>Address</th>
+    <th>Office</th>
+    <th>Estimated Settlement Date</th>
+    <th>Planned Settlement Date</th>
+    <th>Final Settlement Date</th>
+    <th></th>
+  </tr>
+ 
+  <h2>Final Settlement Dates in 30 days</h2>
+  <% @final_projects.each do |project| %>
+    <tr>
+      <td><%= project.status %></td>
+      <td><%= project.lot %></td>
+      <td><%= project.estate %></td>
+      <td><%= project.address %></td>
+      <td><%= project.office %></td>
+      <td><%= project.settlement.date_string(:estimated_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:planned_settlement_date) %></td>
+      <td><%= project.settlement.date_string(:final_settlement_date) %></td>
+      <td><%= link_to 'Show', project_path(project) %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title_register_date: MyString
+  estimated_settlement_date: MyString
+  planned_settlement_data: MyString
+  final_settlement_date: MyString
+  funds_type: MyString
+  broker: MyString
+  project: one
+
+two:
+  title_register_date: MyString
+  estimated_settlement_date: MyString
+  planned_settlement_data: MyString
+  final_settlement_date: MyString
+  funds_type: MyString
+  broker: MyString
+  project: two
