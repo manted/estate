@@ -13,6 +13,9 @@
     <th>Estate</th>
     <th>Address</th>
     <th>Office</th>
+    <th>Client Name</th>
+    <th>Solicitor</th>
+    <th>Builder</th>
     <th></th>
   </tr>
  
@@ -23,6 +26,9 @@
       <td><%= project.estate %></td>
       <td><%= project.address %></td>
       <td><%= project.office %></td>
+      <td><%= project.client_name %></td>
+      <td><%= project.solicitor %></td>
+      <td><%= project.builder %></td>
       <td><%= link_to 'Show', project_path(project) %></td>
       <td><%= link_to 'Edit', edit_project_path(project) %></td>
       <td><%= link_to 'Destroy', project_path(project),
