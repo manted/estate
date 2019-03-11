@@ -13,66 +13,32 @@
     </div>
   <% end %>
 
-  <p>
-    <%= form.label :lot %><br>
-    <%= form.text_field :lot %>
-  </p>
- 
-  <p>
-    <%= form.label :estate %><br>
-    <%= form.text_field :estate %>
-  </p>
- 
-  <p>
-    <%= form.label :address %><br>
-    <%= form.text_field :address %>
-  </p>
- 
-  <p>
-    <%= form.label :office %><br>
-    <%= form.text_field :office %>
-  </p>
- 
-  <p>
-    <%= form.label :client_name %><br>
-    <%= form.text_field :client_name %>
-  </p>
- 
-  <p>
-    <%= form.label :firb %><br>
-    <%= form.text_field :firb %>
-  </p>
- 
-  <p>
-    <%= form.label :solicitor %><br>
-    <%= form.text_field :solicitor %>
-  </p>
- 
-  <p>
-    <%= form.label :builder %><br>
-    <%= form.text_field :builder %>
-  </p>
+  <% Project::PROJECT_FIELDS.each do |field, data| %>
+    <p>
+      <%= form.label field %><br>
+      <% if data[:type] == "select" %>
+        <select name=<%= field %>>
+          <% data[:options].each do |option| %>
+            <option value="<%= option %>"><%= option %></option>
+          <% end %>
+        </select>
+      <% else %>
+        <%= form.text_field field %>
+      <% end %>
+    </p>
+  <% end %>
 
   <h2>Settlement</h2>
-  <p>
-    <%= form.label :estimated_settlement_date %><br>
-    <%= form.text_field :estimated_settlement_date, :value => @project.date_string(:estimated_settlement_date) %>
-  </p>
- 
-  <p>
-    <%= form.label :title_registered_date %><br>
-    <%= form.text_field :title_registered_date, :value => @project.date_string(:title_registered_date) %>
-  </p>
- 
-  <p>
-    <%= form.label :planned_settlement_date %><br>
-    <%= form.text_field :planned_settlement_date, :value => @project.date_string(:planned_settlement_date) %>
-  </p>
- 
-  <p>
-    <%= form.label :final_settlement_date %><br>
-    <%= form.text_field :final_settlement_date, :value => @project.date_string(:final_settlement_date) %>
-  </p>
+  <% Project::SETTLEMENT_FIELDS.each do |field, data| %>
+    <p>
+      <%= form.label field %><br>
+      <% if data[:type] == "date" %>
+        <%= form.text_field field, :value => @project.date_string(field) %>
+      <% else %>
+        <%= form.text_field field, :value => @project.settlement[field] %>
+      <% end %>
+    </p>
+  <% end %>
  
   <p>
     <%= form.submit %>

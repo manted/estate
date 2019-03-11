@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
   end
 
   def settlement_params
-    params.require(:project).permit(:estimated_settlement_date, :title_registered_date, :planned_settlement_date, :final_settlement_date, :funds_type, :broker)
+    params.require(:project).permit(:property_type, :funds_type, :estimated_settlement_date, :title_registered_date, :planned_settlement_date, :final_settlement_date, :funds_type, :broker)
   end
 
   def settlement_date_params

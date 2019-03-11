@@ -3,50 +3,11 @@
   <%= link_to 'Edit', edit_project_path(@project) %>
 </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @project.status %>
-</p>
+<% Project::PROJECT_FIELDS.each do |field, data| %>
+  <p>
+    <strong><%= data[:title] %>:</strong>
+    <%= @project[field] %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Lot:</strong>
-  <%= @project.lot %>
-</p>
- 
-<p>
-  <strong>Estate:</strong>
-  <%= @project.estate %>
-</p>
- 
-<p>
-  <strong>Address:</strong>
-  <%= @project.address %>
-</p>
- 
-<p>
-  <strong>Office:</strong>
-  <%= @project.office %>
-</p>
- 
-<p>
-  <strong>Client Name:</strong>
-  <%= @project.client_name %>
-</p>
- 
-<p>
-  <strong>FIRB:</strong>
-  <%= @project.firb %>
-</p>
- 
-<p>
-  <strong>Solicitor:</strong>
-  <%= @project.solicitor %>
-</p>
- 
-<p>
-  <strong>Builder:</strong>
-  <%= @project.builder %>
-</p>
-
-<h2>Settlement</h2>
 <%= render @project.settlement %>

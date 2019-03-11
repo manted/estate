@@ -1,19 +1,11 @@
-<p>
-  <strong>Estimated Settlement Date:</strong>
-  <%= settlement.date_string(:estimated_settlement_date) %>
-</p>
- 
-<p>
-  <strong>Title Registered Date:</strong>
-  <%= settlement.date_string(:title_registered_date) %>
-</p>
- 
-<p>
-  <strong>Planned Settlement Date:</strong>
-  <%= settlement.date_string(:planned_settlement_date) %>
-</p>
- 
-<p>
-  <strong>Final Settlement Date:</strong>
-  <%= settlement.date_string(:final_settlement_date) %>
-</p>
+<h2>Settlement</h2>
+<% Project::SETTLEMENT_FIELDS.each do |field, data| %>
+  <p>
+    <strong><%= data[:title] %>:</strong>
+    <% if data[:type] == "date" %>
+      <%= @project.date_string(field) %>
+    <% else %>
+      <%= @project.settlement[field] %>
+    <% end %>
+  </p>
+<% end %>

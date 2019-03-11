@@ -1,28 +1,25 @@
-<table>
-  <tr>
-    <th>Status</th>
-    <th>Lot</th>
-    <th>Estate</th>
-    <th>Address</th>
-    <th>Office</th>
-    <th>Client Name</th>
-    <th>FIRB</th>
-    <th>Solicitor</th>
-    <th>Builder</th>
-    <th></th>
+<table border="1">
+  <tr align="center">
+    <% Project::PROJECT_FIELDS.each do |field, data| %>
+        <th align="center"><%= data[:title] %></th>
+    <% end %>
+    <% Project::SETTLEMENT_FIELDS.each do |field, data| %>
+        <th align="center"><%= data[:title] %></th>
+    <% end %>
   </tr>
  
   <% @projects.each do |project| %>
     <tr>
-      <td><%= project.status %></td>
-      <td><%= project.lot %></td>
-      <td><%= project.estate %></td>
-      <td><%= project.address %></td>
-      <td><%= project.office %></td>
-      <td><%= project.client_name %></td>
-      <td><%= project.firb %></td>
-      <td><%= project.solicitor %></td>
-      <td><%= project.builder %></td>
+      <% Project::PROJECT_FIELDS.each do |field, data| %>
+        <td align="center"><%= project[field] %></td>
+      <% end %>
+      <% Project::SETTLEMENT_FIELDS.each do |field, data| %>
+        <% if data[:type] == "date" %>
+          <td align="center"><%= project.date_string(field) %></td>
+        <% else %>
+          <td align="center"><%= project.settlement[field] %></td>
+        <% end %>
+      <% end %>
       <td><%= link_to 'Show', project_path(project) %></td>
       <td><%= link_to 'Edit', edit_project_path(project) %></td>
       <td><%= link_to 'Destroy', project_path(project),
