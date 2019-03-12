@@ -47,7 +47,38 @@ class ProjectsController < ApplicationController
     search_params.each do |key, val|
       valid_params[key.to_sym] = val if val.present?
     end
-    @projects = Project.where(valid_params)
+    # settlement
+    valid_settlement_params = {}
+    settlement_search_params.each do |key, val|
+      valid_settlement_params[("settlements."+key).to_sym] = val if val.present?
+    end
+    valid_params = valid_params.reverse_merge(valid_settlement_params)
+    puts @projects
+    @projects = Project.joins(:settlement).where(valid_params)
+    # settlement date
+    year_from = settlement_date_search_params[:estimated_year_from]
+    month_from = settlement_date_search_params[:estimated_month_from]
+    year_to = settlement_date_search_params[:estimated_year_to]
+    month_to = settlement_date_search_params[:estimated_month_to]
+    from_date = nil
+    if year_from.present?
+      search_year_from = year_from.to_i
+      search_month_from = month_from.present? ? month_from.to_i : 1
+      from_date = Date.new(search_year_from, search_month_from, 1)
+    end
+    to_date = nil
+    if year_to.present?
+      search_year_to = year_to.to_i
+      search_month_to = month_to.present? ? month_to.to_i : 12
+      to_date = Date.new(search_year_to, search_month_to, 1).end_of_month
+    end
+    if from_date && to_date
+      @projects = @projects.where("settlements.estimated_settlement_date >= ? AND settlements.estimated_settlement_date <= ?", from_date, to_date)
+    elsif from_date
+      @projects = @projects.where("settlements.estimated_settlement_date >= ?", from_date)
+    elsif to_date
+      @projects = @projects.where("settlements.estimated_settlement_date <= ?", to_date)
+    end
   end
 
   private
@@ -89,6 +120,14 @@ class ProjectsController < ApplicationController
   end
 
   def search_params
-    params.permit(:property_status, :lot, :estate, :address, :office, :client_name, :firb, :solicitor, :builder)
+    params.permit(:property_status, :lot, :estate, :address, :office, :client_name, :solicitor, :builder)
+  end
+
+  def settlement_search_params
+    params.permit(:funds_type, :broker)
+  end
+
+  def settlement_date_search_params
+    params.permit(:estimated_year_from, :estimated_month_from, :estimated_year_to, :estimated_month_to)
   end
 end

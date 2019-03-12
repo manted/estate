@@ -2,7 +2,11 @@ module StringDate
   def date_from_string(date_string)
     if date_string.present?
       values = date_string.split("/")
-      Date.new(values[2].to_i, values[1].to_i, values[0].to_i)
+      if values.size == 3
+        Date.new(values[2].to_i, values[1].to_i, values[0].to_i)
+      else
+        Date.new(values[1].to_i, values[0].to_i, 1)
+      end
     else
       nil
     end

@@ -1,13 +1,36 @@
 <%= form_with(model: @project, method: 'get', local: true) do |form| %>
   <% Project::PROJECT_FIELDS.each do |field, data| %>
+    <% next if data[:ignore_search] %>
     <p>
       <%= form.label field %><br>
       <% if data[:type] == "select" %>
-        <select name=<%= field %>>
-          <% data[:options].each do |option| %>
-            <option value="<%= option %>"><%= option %></option>
+        <%= form.select(field) do %>
+          <% data[:options].each do |option| -%>
+            <%= content_tag(:option, option, value: option) %>
           <% end %>
-        </select>
+        <% end %>
+      <% else %>
+        <%= form.text_field field %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <h2>Settlement</h2>
+  <% Project::SETTLEMENT_FIELDS.each do |field, data| %>
+    <% next if data[:ignore_search] %>
+    <p>
+      <%= form.label field %><br>
+      <% if data[:type] == "select" %>
+        <%= form.select(field) do %>
+          <% data[:options].each do |option| -%>
+            <%= content_tag(:option, option, value: option) %>
+          <% end %>
+        <% end %>
+      <% elsif data[:type] == "date" %>
+        <% data[:search_options].each do |option| -%>
+          <%= form.label option %>
+          <%= form.text_field option %>
+        <% end %>
       <% else %>
         <%= form.text_field field %>
       <% end %>

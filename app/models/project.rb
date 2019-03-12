@@ -22,6 +22,10 @@ class Project < ApplicationRecord
             :type => "string",
             :title => "Estate"
         },
+        :address => {
+            :type => "string",
+            :title => "Address"
+        },
         :office => {
             :type => "string",
             :title => "Office"
@@ -31,9 +35,10 @@ class Project < ApplicationRecord
             :title => "Client Name"
         },
         :firb => {
-            :type => "string",
+            :type => "select",
             :options => [ "Y", "N" ],
-            :title => "FIRB"
+            :title => "FIRB",
+            :ignore_search => true
         },
         :solicitor => {
             :type => "string",
@@ -47,29 +52,39 @@ class Project < ApplicationRecord
 
     SETTLEMENT_FIELDS = {
         :property_type => {
-            :type => "string",
+            :type => "select",
             :options => [ "Normal", "Titled" ],
-            :title => "Property Type"
+            :title => "Property Type",
+            :ignore_search => true
         },
         :estimated_settlement_date => {
             :type => "date",
-            :title => "Est. Settle Date"
+            :title => "Est. Settle Date",
+            :search_options => [
+              :estimated_year_from,
+              :estimated_month_from,
+              :estimated_year_to,
+              :estimated_month_to
+            ]
         },
         :title_registered_date => {
             :type => "date",
-            :title => "Title Registered Date"
+            :title => "Title Registered Date",
+            :ignore_search => true
         },
         :planned_settlement_date => {
             :type => "date",
-            :title => "Planned Settle Date"
+            :title => "Planned Settle Date",
+            :ignore_search => true
         },
         :final_settlement_date => {
             :type => "date",
-            :title => "Final Settle Date"
+            :title => "Final Settle Date",
+            :ignore_search => true
         },
         :funds_type => {
             :type => "select",
-            :options => [ "Cash", "External Brokers", "JD Broker", "JD Loan" ],
+            :options => [ "", "Cash", "External Brokers", "JD Broker", "JD Loan" ],
             :title => "Funds Type"
         },
         :broker => {
